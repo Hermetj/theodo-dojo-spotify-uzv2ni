@@ -1,12 +1,18 @@
 import logo from './assets/logo.svg';
 import './App.css';
 import { useState } from 'react';
+import { fetchTracks } from './lib/fetchTracks';
+import { useQuery } from '@tanstack/react-query';
 
 const App = () => {
   const [trackIndex, setTrackIndex] = useState(0);
   const goToNextTrack = () => {
     setTrackIndex(trackIndex + 1);
   };
+  const { data: tracks } = useQuery({
+    queryKey: ['tracks'],
+    queryFn: fetchTracks,
+  });
   return (
     <div className="App">
       <header className="App-header">
@@ -20,6 +26,7 @@ const App = () => {
         <audio src={trackUrls[trackIndex]} autoPlay controls />
         <button onClick={goToNextTrack}>Next track</button>
       </div>
+      <span>Il y a {tracks.length} morceaux likés</span>
     </div>
   );
 };
