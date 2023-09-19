@@ -14,6 +14,11 @@ const App = () => {
     queryKey: ['tracks'],
     queryFn: fetchTracks,
   });
+  const currentTrack = tracks[0];
+  const AlbumCover = ({ currentTrack }: { currentTrack: SavedTrack }) => {
+    const src = track.album.images[0].url; // A changer ;)
+    return <img src={src} style={{ width: 400, height: 400 }} />;
+  };
   return (
     <div className="App">
       <header className="App-header">
@@ -21,13 +26,17 @@ const App = () => {
         <h1 className="App-title">Bienvenue sur mon blind test</h1>
       </header>
       <div className="App-images">
+        <AlbumCover track={currentTrack} />
         <p>BlindTest!</p>
       </div>
       <div className="App-buttons">
         <audio src={trackUrls[trackIndex]} autoPlay controls />
         <button onClick={goToNextTrack}>Next track</button>
       </div>
-      <span>Morceaux liké : {tracks[0]?.track.name} </span>
+      <span>
+        Il y a {tracks.length} morceau likés , Premier Morceaux liké :{' '}
+        {tracks[0]?.track.name}{' '}
+      </span>
     </div>
   );
 };
