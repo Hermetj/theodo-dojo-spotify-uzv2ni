@@ -1,7 +1,12 @@
 import logo from './assets/logo.svg';
 import './App.css';
+import { useState } from 'react';
 
 const App = () => {
+  const [trackIndex, setTrackIndex] = useState(0);
+  const goToNextTrack = () => {
+    setTrackIndex(trackIndex + 1);
+  };
   return (
     <div className="App">
       <header className="App-header">
@@ -11,8 +16,10 @@ const App = () => {
       <div className="App-images">
         <p>BlindTest!</p>
       </div>
-      <audio src={trackUrls[0]} autoPlay controls />;
-      <div className="App-buttons"></div>
+      <div className="App-buttons">
+        <audio src={trackUrls[trackIndex]} autoPlay controls />
+        <button onClick={goToNextTrack}>Next track</button>
+      </div>
     </div>
   );
 };
