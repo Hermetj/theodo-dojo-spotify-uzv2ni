@@ -3,6 +3,7 @@ import './App.css';
 import { useState } from 'react';
 import { fetchTracks } from './lib/fetchTracks';
 import { useQuery } from '@tanstack/react-query';
+import { SavedTrack } from 'spotify-types';
 
 const App = () => {
   const [trackIndex, setTrackIndex] = useState(0);
@@ -26,7 +27,7 @@ const App = () => {
         <audio src={trackUrls[trackIndex]} autoPlay controls />
         <button onClick={goToNextTrack}>Next track</button>
       </div>
-      <span>Il y a {tracks.length} morceaux likés</span>
+      <span>Morceaux liké : {tracks[0]?.track.name} </span>
     </div>
   );
 };
